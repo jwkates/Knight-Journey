@@ -59,11 +59,13 @@ public class Main {
                 }
             }
 
+            // Sort the legal moves list in lexicographic order
             Collections.sort(legalMoves);
             return legalMoves;
         }
 
         public void printTour() {
+            // Start the solution from the top left square.
             List<Square> solution = new ArrayList<Square>();
             solution.add(board[0][0]);
 
@@ -74,7 +76,6 @@ public class Main {
             } else {
                 System.out.print("impossible");
             }
-
             System.out.println();
         }
 
@@ -100,8 +101,6 @@ public class Main {
         private boolean isValid(int row, int col) {
             return (row >= 0 && row < rows) && (col >= 0 && col < cols);
         }
-
-
     }
 
     class Square implements Comparable<Square> {
@@ -114,6 +113,9 @@ public class Main {
         }
 
         public int compareTo(Square sq) {
+            // Chessboard Squares are ordered first by column, and then by row.
+            // This imposes a lexicographic ordering on the squares when the column
+            // is written as a letter.
             if (col == sq.col && row == sq.row) return 0;
 
             if (col < sq.col) return -1;
@@ -127,9 +129,8 @@ public class Main {
         public String toString() {
             char[] alphabet = "ABCDEFGHIJKLMNOPQRSTUV".toCharArray();
 
-            String squareName = alphabet[col] + String.valueOf(row + 1);
-
-            return squareName;
+            // Print column as a letter + row as a number
+            return alphabet[col] + String.valueOf(row + 1);
         }
     }
 }
